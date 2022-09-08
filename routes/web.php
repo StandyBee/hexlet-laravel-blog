@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,9 @@ Route::get('/', function () {
     return 'HI SNOVA TUT';
 });
 
-Route::get('about', function () {
-    $tags = ['обучение', 'программирование', 'php', 'oop'];
-    return view('about', ['tags' => $tags]);
-});
+Route::get('about', [PageController::class, 'about']);
+
+Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
+
+Route::get('articles/{id}', [ArticleController::class, 'show'])
+  ->name('articles.show');
